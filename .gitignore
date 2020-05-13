@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.pyc
+*~
+*.swp
+*.gz
+*.swn
+*.swo
+.DS_Store
+.env
+*.log
+mediadb.sqlite3
+/media
+/static

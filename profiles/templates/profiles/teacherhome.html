@@ -1,0 +1,7 @@
+TEACHER HOME REACHED
+
+
+<form method="POST" action="{% url 'logout' %}">
+  {% csrf_token %}
+  <input class="btn btn-primary" type="submit" value="Logout" />
+  </form>
