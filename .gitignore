@@ -14,3 +14,4 @@ __pycache__/
 mediadb.sqlite3
 /media
 /static
+schoolsite/local_settings.py

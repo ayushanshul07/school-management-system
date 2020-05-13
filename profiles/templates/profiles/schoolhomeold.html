@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Homepage</title>
+</head>
+
+<body>
+  <style>
+  table, th, td {
+    border: 1px solid black;
+  }
+  </style>
+
+  
+  <br/>
+  <h3>Upload lists in csv format</h3>
+  <h4>[FirstName, MiddleName(Optional), LastName, email]</h4>
+  {% load static %}
+
+    <table>
+    <tr>
+      <th>CLASS</th>
+      <th>Upload</th> 
+      <th>status</th>
+    </tr>
+    <tr>
+        <td>Teacher</td>
+        <td>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="class">
+            <button type="submit">Upload</button>
+          </form>
+        </td> 
+        <td>
+          {% if uploaded_file_url_t %}
+          <p>Done</p>
+          {% endif %}
+        </td>
+      </tr>
+
+      <tr>
+        <td>Class 6</td>
+        <td>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="class6">
+            <button type="submit">Upload</button>
+          </form>
+        </td> 
+        <td>
+          {% if uploaded_file_url_6 %}
+          <p>Done</p>
+          {% endif %}
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>Class 7</td>
+        <td>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="class7">
+            <button type="submit">Upload</button>
+          </form>
+        </td> 
+        <td>
+          {% if uploaded_file_url_7 %}
+          <p>Done</p>
+          {% endif %}
+        </td>
+      </tr>
+
+      <tr>
+        <td>Class 8</td>
+        <td>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="class8">
+            <button type="submit">Upload</button>
+          </form>
+        </td> 
+        <td>
+          {% if uploaded_file_url_8 %}
+          <p>Done</p>
+          {% endif %}
+        </td>
+      </tr>
+
+      <tr>
+        <td>Class 9</td>
+        <td>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="class9">
+            <button type="submit">Upload</button>
+          </form>
+        </td> 
+        <td>
+          {% if uploaded_file_url_9 %}
+          <p>Done</p>
+          {% endif %}
+        </td>
+      </tr>
+
+      <tr>
+        <td>Class 10</td>
+        <td>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="class10">
+            <button type="submit">Upload</button>
+          </form>
+        </td> 
+        <td>
+          {% if uploaded_file_url_10 %}
+          <p>Done</p>
+          {% endif %}
+        </td>
+      </tr>
+
+
+    </table>
+
+
+  <form method="POST" action="{% url 'logout' %}">
+  {% csrf_token %}
+  <input class="btn btn-primary" type="submit" value="Logout" />
+  </form>
+  
+</body>
+</html>

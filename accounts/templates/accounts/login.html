@@ -37,7 +37,8 @@
 
                                 Want to register your school?
                                 </br>
-                                <form action="{% url 'schoolsignup' %}">
+                                <form method="POST" action="{% url 'schoolsignup' %}">
+                                    {% csrf_token %}
                                     <input type="submit" class="btn btn-primary" value="Register" />
                                 </form>
                                 

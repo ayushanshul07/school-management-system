@@ -1,133 +1,102 @@
-<!doctype html>
 <html lang="en">
-<head>
-  <title>Homepage</title>
-</head>
+   <head>
+      <title itemprop="name">Your Profile</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+      <meta name="viewport" content="width=device-width">
 
-<body>
-  <style>
-  table, th, td {
-    border: 1px solid black;
-  }
-  </style>
+      {% load static %}
+      <script src="{% static 'profiles/schoolhome.js' %}" type="text/javascript"></script>
+   </head>
 
-  
-  <br/>
-  <h3>Upload lists in csv format</h3>
-  <h4>[FirstName, MiddleName(Optional), LastName, email]</h4>
-  {% load static %}
+   <body>
+      <div id="snippetContent">
+         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
 
-    <table>
-    <tr>
-      <th>CLASS</th>
-      <th>Upload</th> 
-      <th>status</th>
-    </tr>
-    <tr>
-        <td>Teacher</td>
-        <td>
-          <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="class">
-            <button type="submit">Upload</button>
-          </form>
-        </td> 
-        <td>
-          {% if uploaded_file_url_t %}
-          <p>Done</p>
-          {% endif %}
-        </td>
-      </tr>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 
-      <tr>
-        <td>Class 6</td>
-        <td>
-          <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="class6">
-            <button type="submit">Upload</button>
-          </form>
-        </td> 
-        <td>
-          {% if uploaded_file_url_6 %}
-          <p>Done</p>
-          {% endif %}
-        </td>
-      </tr>
+         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script> 
 
+         <div class="container bootstrap snippet">
 
-      <tr>
-        <td>Class 7</td>
-        <td>
-          <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="class7">
-            <button type="submit">Upload</button>
-          </form>
-        </td> 
-        <td>
-          {% if uploaded_file_url_7 %}
-          <p>Done</p>
-          {% endif %}
-        </td>
-      </tr>
+            <div class="row">
+               <div class="col-sm-11">
+                  <h3><b>Welcome!</b></h3>
+               </div>
+               <div class="col-sm-1"> 
+                  <form method="POST" action="{% url 'logout' %}">
+                     {% csrf_token %}
+                     <input type="submit" class="btn btn-primary pull-right" value="Logout" />
+                  </form>
+               </div>
+            </div>
 
-      <tr>
-        <td>Class 8</td>
-        <td>
-          <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="class8">
-            <button type="submit">Upload</button>
-          </form>
-        </td> 
-        <td>
-          {% if uploaded_file_url_8 %}
-          <p>Done</p>
-          {% endif %}
-        </td>
-      </tr>
+            <hr>
 
-      <tr>
-        <td>Class 9</td>
-        <td>
-          <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="class9">
-            <button type="submit">Upload</button>
-          </form>
-        </td> 
-        <td>
-          {% if uploaded_file_url_9 %}
-          <p>Done</p>
-          {% endif %}
-        </td>
-      </tr>
+            <div class="row">
+               <div class="col-sm-4">
+                  <ul class="list-group">
 
-      <tr>
-        <td>Class 10</td>
-        <td>
-          <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="class10">
-            <button type="submit">Upload</button>
-          </form>
-        </td> 
-        <td>
-          {% if uploaded_file_url_10 %}
-          <p>Done</p>
-          {% endif %}
-        </td>
-      </tr>
+                     <li class="list-group-item text-muted">Profile</li>
 
+                     <li class="list-group-item text-right"><span class="pull-left"><strong>Username</strong></span> {{school_admin.username}}</li>
+            
+                     <li class="list-group-item text-right"><span class="pull-left"><strong>Real name</strong></span> {{school_admin.first_name}} {{school_admin.last_name}}</li>
+                     <li class="list-group-item text-right"><span class="pull-left"><strong>School Name</strong></span> {{school_admin.school_name}}</li>
 
-    </table>
+                     <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> {{school_admin.date_joined}}</li>
 
+                  </ul>
+               </div>
+               <div class="col-sm-8"> <a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a></div>
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+                           {% csrf_token %}
+                           <input type="file" name="class">
+                           <button type="submit">Upload</button>
+                         </form>
+            <div class="row">
+               <div class="col-sm-12">
+                  <ul class="nav nav-tabs" id="myTab">
+                     <li class="active"><a href="#home" data-toggle="tab">Teachers</a></li>
+                  </ul>
+                  <div class="tab-content">
+                     <div class="tab-pane active" id="home">
 
-  <form method="POST" action="{% url 'logout' %}">
-  {% csrf_token %}
-  <input class="btn btn-primary" type="submit" value="Logout" />
-  </form>
-  
-</body>
+                        <div class="table-responsive">
+                           <table class="table table-hover">
+                              <thead>
+                                 <tr>
+                                    <!-- <th>#</th> -->
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                 </tr>
+                              </thead>
+                              <tbody id="items">
+                                 {% for teacher in teachers_list %}
+                                 <tr>
+                                    <!-- <td>1</td> -->
+                                    
+                                    <td>{{teacher.first_name}}</td>
+                                    <td>{{teacher.last_name}}</td>
+                                    <td>{{teacher.email}}</td>
+                                    
+                                 </tr>
+                                 {% endfor %}
+                              </tbody>
+                           </table>
+                        </div>
+                        <hr>
+                     </div>
+                     
+                  </div>
+               </div>
+            </div>
+         </div>
+         <style type="text/css">body{margin-top:20px;}</style>
+         <script type="text/javascript"></script> 
+      </div>
+   </body>
 </html>

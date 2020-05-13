@@ -31,10 +31,11 @@ def schoolhome(request, school_id):
 
 			# remove first 4 chars i.e class
 			standard = html_name[5:]
+			school_object = SchoolAdmin.objects.get(id=school_id)
 			if standard == '':
+				Teacher.objects.all().delete()
 				with open(uploaded_file_url) as f:
 					reader = csv.reader(f)
-					school_object = SchoolAdmin.objects.get(id=school_id)
 					for row in reader:
 						Teacher.objects.create_user(
 							first_name=row[0],
@@ -44,14 +45,17 @@ def schoolhome(request, school_id):
 							password=generate_username(row[0],row[2]),
 							school_id=school_object,
 							role=Types.TEACHER)
-				return render(request, 'profiles/schoolhome.html', {
-					'uploaded_file_url_t': uploaded_file_url
+				school_object = SchoolAdmin.objects.get(id=school_id)
+				teachers_list = Teacher.objects.filter(school_id_id=school_id)
+				return render(request, 'profiles/schoolhome.html',
+					{	'school_admin': school_object, 
+						'teachers_list': teachers_list
 					})
 			else:
 				standard = int(standard)
+				Student.objects.filter(standard=standard).delete()
 				with open(uploaded_file_url) as f:
 					reader = csv.reader(f)
-					school_object = SchoolAdmin.objects.get(id=school_id)
 					for row in reader:
 						Student.objects.create_user(
 							first_name=row[0],
@@ -62,10 +66,19 @@ def schoolhome(request, school_id):
 							school_id=school_object,
 							standard=standard,
 							role=Types.STUDENT)
-				return render(request, 'profiles/schoolhome.html', {
-					'uploaded_file_url_' + html_name[5:] : uploaded_file_url
-					})
-	return render(request, 'profiles/schoolhome.html')
+				school_object = SchoolAdmin.objects.get(id=school_id)
+				teachers_list = Teacher.objects.filter(school_id_id=school_id)
+				return render(request, 'profiles/schoolhome.html',
+					{	'school_admin': school_object, 
+						'teachers_list': teachers_list
+					})	
+	else:
+		school_object = SchoolAdmin.objects.get(id=school_id)
+		teachers_list = Teacher.objects.filter(school_id_id=school_id)
+		return render(request, 'profiles/schoolhome.html',
+			{	'school_admin': school_object, 
+				'teachers_list': teachers_list
+			})
 
 @login_required(login_url='accounts/login/')
 def teacherhome(request, teacher_id):

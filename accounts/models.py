@@ -4,14 +4,14 @@ from enumfields import EnumField
 from enum import Enum
 from django.conf import settings
 
-# class SchoolAdminManager(UserManager):
-#     pass
+class SchoolAdminManager(UserManager):
+    pass
 
-# class TeacherManager(UserManager):
-#     pass
+class TeacherManager(UserManager):
+    pass
 
-# class StudentManager(UserManager):
-#     pass
+class StudentManager(UserManager):
+    pass
 
 class Types(Enum):
     ADMIN = 'admin'
