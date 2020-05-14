@@ -121,6 +121,6 @@ STATIC_URL = '/static/'
 
 
 try:
-    from mysite.local_settings import *
+    from schoolsite.local_settings import *
 except Exception as e:
     pass

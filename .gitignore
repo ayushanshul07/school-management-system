@@ -11,7 +11,7 @@ __pycache__/
 .DS_Store
 .env
 *.log
-mediadb.sqlite3
+*.sqlite3
 /media
 /static
 schoolsite/local_settings.py

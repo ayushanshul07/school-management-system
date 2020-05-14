@@ -2,7 +2,6 @@
    <head>
       <title itemprop="name">Your Profile</title>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      
       <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
       <meta name="viewport" content="width=device-width">
 
@@ -51,16 +50,17 @@
                </div>
                <div class="col-sm-8"> <a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a></div>
             </div>
-            <form method="POST" enctype="multipart/form-data">
-                           {% csrf_token %}
-                           <input type="file" name="class">
-                           <button type="submit">Upload</button>
-                         </form>
+
+            {% load custom_tags %}
             <div class="row">
                <div class="col-sm-12">
                   <ul class="nav nav-tabs" id="myTab">
                      <li class="active"><a href="#home" data-toggle="tab">Teachers</a></li>
+                     {% for class in class_list %}
+                     <li><a href="#class{{class}}" data-toggle="tab"> Class {{ class }}</a></li>
+                     {% endfor %}
                   </ul>
+
                   <div class="tab-content">
                      <div class="tab-pane active" id="home">
 
@@ -78,22 +78,70 @@
                                  {% for teacher in teachers_list %}
                                  <tr>
                                     <!-- <td>1</td> -->
-                                    
                                     <td>{{teacher.first_name}}</td>
                                     <td>{{teacher.last_name}}</td>
                                     <td>{{teacher.email}}</td>
-                                    
                                  </tr>
                                  {% endfor %}
                               </tbody>
                            </table>
                         </div>
                         <hr>
+
+                        <form method="POST" enctype="multipart/form-data">
+                           {% csrf_token %}
+                          <div class="form-group" style="height:auto;">
+                            <label for="file">Upload File</label>
+                            <input type="file" class="form-control" name="class">
+                            <p class="help-block">[CSV Format: FirstName, MiddleName(Optional), LastName, email] Upload teachers list here</p>
+                          </div>
+                        <button type="submit" name="uploadp_btn" class="btn btn-primary">Upload!</button>
+                        </form> <hr>
                      </div>
-                     
+                     {% for class in class_list %}
+                     <div class="tab-pane" id="class{{class}}">
+                        <div class="table-responsive">
+                           <table class="table table-hover">
+                              <thead>
+                                 <tr>
+                                    <!-- <th>#</th> -->
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                 </tr>
+                              </thead>
+                              <tbody id="items">
+                                 {% for student in students_list|in_category:class %}
+                                 <tr>
+                                    <!-- <td>1</td> -->
+                                    <td>{{student.first_name}}</td>
+                                    <td>{{student.last_name}}</td>
+                                    <td>{{student.email}}</td>
+                                 </tr>
+                                 {% endfor %}
+                              </tbody>
+                           </table>
+                        </div>
+                        <hr>
+
+                        <form method="POST" enctype="multipart/form-data">
+                           {% csrf_token %}
+                          <div class="form-group" style="height:auto;">
+                            <label for="file">Upload File</label>
+                            <input type="file" class="form-control" name="class{{class}}">
+                            <p class="help-block">[CSV Format: FirstName, MiddleName(Optional), LastName, email] Upload class {{class}} list here</p>
+                          </div>
+                        <button type="submit" name="uploadp_btn" class="btn btn-primary">Upload!</button>
+                        </form> <hr>
+                     </div>
+                     {% endfor %}
+
+
                   </div>
                </div>
             </div>
+
+
          </div>
          <style type="text/css">body{margin-top:20px;}</style>
          <script type="text/javascript"></script> 

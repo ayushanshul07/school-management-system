@@ -47,9 +47,13 @@ def schoolhome(request, school_id):
 							role=Types.TEACHER)
 				school_object = SchoolAdmin.objects.get(id=school_id)
 				teachers_list = Teacher.objects.filter(school_id_id=school_id)
+				students_list = Student.objects.filter(school_id_id=school_id)
+				class_list = [5,6,7,8,9,10]
 				return render(request, 'profiles/schoolhome.html',
 					{	'school_admin': school_object, 
-						'teachers_list': teachers_list
+						'teachers_list': teachers_list,
+						'students_list': students_list,
+						'class_list': class_list
 					})
 			else:
 				standard = int(standard)
@@ -68,16 +72,26 @@ def schoolhome(request, school_id):
 							role=Types.STUDENT)
 				school_object = SchoolAdmin.objects.get(id=school_id)
 				teachers_list = Teacher.objects.filter(school_id_id=school_id)
+				students_list = Student.objects.filter(school_id_id=school_id)
+				class_list = [5,6,7,8,9,10]
+
 				return render(request, 'profiles/schoolhome.html',
 					{	'school_admin': school_object, 
-						'teachers_list': teachers_list
+						'teachers_list': teachers_list,
+						'students_list': students_list,
+						'class_list': class_list
 					})	
 	else:
 		school_object = SchoolAdmin.objects.get(id=school_id)
 		teachers_list = Teacher.objects.filter(school_id_id=school_id)
+		students_list = Student.objects.filter(school_id_id=school_id)
+		class_list = [5,6,7,8,9,10]
+
 		return render(request, 'profiles/schoolhome.html',
 			{	'school_admin': school_object, 
-				'teachers_list': teachers_list
+				'teachers_list': teachers_list,
+				'students_list': students_list,
+				'class_list': class_list
 			})
 
 @login_required(login_url='accounts/login/')
