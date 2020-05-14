@@ -5,6 +5,9 @@ from .models import SchoolAdmin, Teacher, Student
 
 from .forms import SignUpForm
 
+def home(request):
+    return redirect('loginurl')
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
